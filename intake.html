@@ -820,7 +820,9 @@
     });
   }
 
-    function renderStep() {
+      function renderStep(opts) {
+    const doScroll = !opts || opts.scroll !== false;
+
     const step = steps[state.stepIndex];
     if (!step) return;
     state.stepId = step.id;
@@ -829,12 +831,12 @@
 
     if (step.checklist) {
       renderChecklist(step);
-      scrollToFormTop();
+      if (doScroll) scrollToFormTop();
       return;
     }
     if (step.dynamic) {
       renderOrientacion(step);
-      scrollToFormTop();
+      if (doScroll) scrollToFormTop();
       return;
     }
 
@@ -851,7 +853,7 @@
     cardHost.appendChild(renderNav(step));
     updateProgress();
     saveState();
-    scrollToFormTop();
+    if (doScroll) scrollToFormTop();
   }
   // ─────────────────────────────────────────────
   // RENDER DE CAMPO
@@ -918,10 +920,11 @@
             showCriticalModal();
           }
           // Re-render si cambia ramificación global
-          if (field.key === "orientacion" || field.key === "prioridad" || field.key === "servicios") {
+                    if (field.key === "orientacion" || field.key === "prioridad" || field.key === "servicios") {
             refreshFlowStructure();
+            // refreshFlowStructure ya re-renderiza; ver Paso 3
           } else {
-            renderStep();
+            renderStep({ scroll: false });
           }
         });
         optLabel.appendChild(input);
@@ -1134,18 +1137,17 @@
   // ─────────────────────────────────────────────
   // RECALCULAR FLUJOS (ramificación)
   // ─────────────────────────────────────────────
-  function refreshFlowStructure(rerender) {
+    function refreshFlowStructure(rerender) {
     calcularOrdenFlujos();
-    // Guardamos el id del paso actual para reposicionarnos si sigue existiendo
     const prevId = steps[state.stepIndex] ? steps[state.stepIndex].id : "";
     steps = buildSteps();
     if (rerender) {
       const newIdx = steps.findIndex(s => s.id === prevId);
       if (newIdx >= 0) state.stepIndex = newIdx;
       if (state.stepIndex >= steps.length) state.stepIndex = steps.length - 1;
+      renderStep({ scroll: false });   // <-- AÑADIDO: sin scroll
     }
   }
-
     // ─────────────────────────────────────────────
   // MODAL CRÍTICO (divulgación previa patente)
   // ─────────────────────────────────────────────
