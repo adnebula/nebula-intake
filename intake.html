@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nebula Intake Legal</title>
+</head>
+<body>
+
+<!-- ============================================================
+     Nebula Consulting — Intake Legal
+     Namespace: nb-  ·  No toca estilos globales de Blogger
+     ============================================================ -->
+<div id="nb-intake">
+  <noscript>Este formulario requiere JavaScript. Actívalo para continuar.</noscript>
+</div>
+
+<style>
+  #nb-intake, #nb-intake *, #nb-intake *::before, #nb-intake *::after {
+    box-sizing: border-box; margin: 0; padding: 0;
+  }
+  #nb-intake {
+    --nb-purple: #700093; --nb-purple-dark: #560070; --nb-purple-soft: #f4e6f8;
+    --nb-black: #111; --nb-white: #fff; --nb-gray: #666; --nb-gray-soft: #f7f7f7;
+    --nb-border: #e5e5e5; --nb-danger: #c0392b; --nb-warning: #b8860b;
+    --nb-radius: 8px;
+    --nb-font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--nb-font); color: var(--nb-black); background: var(--nb-white);
+    max-width: 760px; margin: 0 auto; padding: 24px 16px 48px;
+    line-height: 1.5; font-size: 15px;
+  }
+  #nb-intake [hidden] { display: none !important; }
+
+  #nb-intake .nb-brand {
+    display: flex; align-items: center; gap: 10px; font-weight: 700;
+    font-size: 14px; letter-spacing: .5px; text-transform: uppercase;
+    color: var(--nb-purple); margin-bottom: 12px;
+  }
+  #nb-intake .nb-brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--nb-purple); }
+  #nb-intake .nb-progress { height: 6px; background: var(--nb-border); border-radius: 3px; overflow: hidden; }
+  #nb-intake .nb-progress > span { display: block; height: 100%; width: 0; background: var(--nb-purple); transition: width .35s ease; }
+  #nb-intake .nb-progress-label { font-size: 12px; color: var(--nb-gray); margin: 6px 0 20px; }
+
+  #nb-intake .nb-card {
+    background: var(--nb-white); border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius); padding: 24px 20px;
+  }
+  #nb-intake .nb-step-title { font-size: 20px; font-weight: 700; color: var(--nb-black); margin-bottom: 6px; line-height: 1.25; }
+  #nb-intake .nb-step-sub { font-size: 14px; color: var(--nb-gray); margin-bottom: 20px; }
+
+  #nb-intake .nb-field { margin-bottom: 18px; }
+  #nb-intake .nb-label { display: block; font-size: 13px; font-weight: 600; color: var(--nb-black); margin-bottom: 6px; }
+  #nb-intake .nb-label .nb-req { color: var(--nb-danger); margin-left: 2px; }
+  #nb-intake .nb-help { font-size: 12px; color: var(--nb-gray); margin-top: 4px; }
+  #nb-intake .nb-input, #nb-intake .nb-textarea, #nb-intake .nb-select {
+    width: 100%; font-family: inherit; font-size: 15px; color: var(--nb-black);
+    background: var(--nb-white); border: 1px solid var(--nb-border); border-radius: 6px;
+    padding: 10px 12px; transition: border-color .15s, box-shadow .15s;
+  }
+  #nb-intake .nb-textarea { min-height: 96px; resize: vertical; }
+  #nb-intake .nb-input:focus, #nb-intake .nb-textarea:focus, #nb-intake .nb-select:focus {
+    outline: none; border-color: var(--nb-purple); box-shadow: 0 0 0 3px rgba(112,0,147,.12);
+  }
+  #nb-intake .nb-input[aria-invalid="true"], #nb-intake .nb-textarea[aria-invalid="true"] { border-color: var(--nb-danger); }
+  #nb-intake .nb-error { display: block; font-size: 12px; color: var(--nb-danger); margin-top: 4px; min-height: 14px; }
+
+  #nb-intake .nb-options { display: grid; gap: 8px; }
+  #nb-intake .nb-option {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    border: 1px solid var(--nb-border); border-radius: 6px; cursor: pointer;
+    transition: border-color .15s, background .15s; font-size: 14px; line-height: 1.4;
+  }
+  #nb-intake .nb-option:hover { border-color: var(--nb-purple); }
+  #nb-intake .nb-option input { margin-top: 2px; accent-color: var(--nb-purple); flex-shrink: 0; }
+  #nb-intake .nb-option.is-checked { border-color: var(--nb-purple); background: var(--nb-purple-soft); }
+
+  #nb-intake .nb-alert {
+    border-left: 4px solid var(--nb-purple); background: var(--nb-purple-soft);
+    padding: 12px 14px; border-radius: 4px; font-size: 14px; margin-bottom: 16px; line-height: 1.5;
+  }
+  #nb-intake .nb-alert.nb-warning { border-left-color: var(--nb-warning); background: #fdf6e3; }
+  #nb-intake .nb-alert.nb-critical { border-left-color: var(--nb-danger); background: #fdecea; }
+
+  #nb-intake .nb-repeater { display: grid; gap: 8px; margin-bottom: 8px; }
+  #nb-intake .nb-repeater-row { display: grid; grid-template-columns: 1fr 90px 36px; gap: 8px; align-items: center; }
+  #nb-intake .nb-repeater-row .nb-input { padding: 8px 10px; font-size: 14px; }
+  #nb-intake .nb-icon-btn {
+    width: 36px; height: 36px; border-radius: 6px; border: 1px solid var(--nb-border);
+    background: var(--nb-white); color: var(--nb-gray); cursor: pointer; font-size: 18px; line-height: 1;
+  }
+  #nb-intake .nb-icon-btn:hover { border-color: var(--nb-danger); color: var(--nb-danger); }
+  #nb-intake .nb-add-btn {
+    background: none; border: 1px dashed var(--nb-purple); color: var(--nb-purple);
+    padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: inherit;
+  }
+  #nb-intake .nb-sum { font-size: 12px; color: var(--nb-gray); margin-top: 6px; }
+  #nb-intake .nb-sum.is-ok { color: #1e7e34; }
+  #nb-intake .nb-sum.is-bad { color: var(--nb-danger); }
+
+  #nb-intake .nb-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--nb-border);
+  }
+  #nb-intake .nb-btn {
+    font-family: inherit; font-size: 14px; font-weight: 600; border-radius: 6px;
+    padding: 10px 18px; cursor: pointer; border: 1px solid transparent;
+    transition: background .15s, opacity .15s;
+  }
+  #nb-intake .nb-btn:disabled { opacity: .45; cursor: not-allowed; }
+  #nb-intake .nb-btn-primary { background: var(--nb-purple); color: var(--nb-white); }
+  #nb-intake .nb-btn-primary:hover:not(:disabled) { background: var(--nb-purple-dark); }
+  #nb-intake .nb-btn-ghost { background: transparent; color: var(--nb-gray); border-color: var(--nb-border); }
+  #nb-intake .nb-btn-ghost:hover:not(:disabled) { color: var(--nb-black); border-color: var(--nb-black); }
+
+  #nb-intake .nb-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.55);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px; z-index: 99999;
+  }
+  #nb-intake .nb-modal {
+    background: var(--nb-white); border-radius: var(--nb-radius);
+    max-width: 480px; width: 100%; padding: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  }
+  #nb-intake .nb-modal h3 { font-size: 17px; margin-bottom: 10px; color: var(--nb-black); }
+  #nb-intake .nb-modal p { font-size: 14px; color: var(--nb-gray); margin-bottom: 16px; line-height: 1.55; }
+  #nb-intake .nb-modal .nb-modal-actions { display: flex; flex-direction: column; gap: 8px; }
+
+  #nb-intake .nb-checklist { list-style: none; display: grid; gap: 8px; margin: 16px 0; }
+  #nb-intake .nb-checklist li {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    background: var(--nb-gray-soft); border-radius: 6px; font-size: 14px;
+  }
+  #nb-intake .nb-checklist li::before { content: "☐"; color: var(--nb-purple); font-weight: 700; flex-shrink: 0; }
+
+  #nb-intake .nb-success-icon {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--nb-purple-soft);
+    color: var(--nb-purple); display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin: 0 auto 16px;
+  }
+  #nb-intake .nb-consulta-box {
+    display: inline-block; margin-top: 8px; padding: 10px 14px;
+    background: var(--nb-purple-soft); color: var(--nb-purple); border-radius: 6px;
+    font-weight: 700; letter-spacing: .5px; font-size: 15px;
+  }
+
+  #nb-intake .nb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
+
+  #nb-intake .nb-center { text-align: center; }
+
+  @media (max-width: 520px) {
+    #nb-intake { padding: 16px 12px 32px; }
+    #nb-intake .nb-card { padding: 18px 14px; }
+    #nb-intake .nb-repeater-row { grid-template-columns: 1fr 70px 32px; }
+  }
+</style>
+
+<script>
+(function () {
+  "use strict";
+
+  // ════════════════════════════════════════════════
+  // CONFIG — REEMPLAZA ESTAS LÍNEAS CON TUS DATOS
+  // ════════════════════════════════════════════════
+  const ENDPOINT = "https://pfhfjefhcvkvmlkvxaoq.supabase.co/functions/v1/procesar_pedido?action=intake";
+  const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmaGZqZWZoY3Zrdm1sa3Z4YW9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ2MzQyNTksImV4cCI6MjEwMDIxMDI1OX0.WC8-hHcMmtafJCA_Cn-W94O_O1Q7ElsXojEPAt12ghw"; // <- pega tu anon key de Supabase
+  const ENV = "prod"; // "test" para staging
+  const STORAGE_KEY = "nb_intake_v1";
+
+  const FLUJO_LABELS = {
+    A: "Constituir o formalizar empresa",
+    B: "Registrar marca",
+    C: "Registrar patente o invención"
+  };
+
+  const RANGOS = [
+    { v: "menos_200", l: "Menos de $200" },
+    { v: "200_500", l: "$200 – $500" },
+    { v: "500_1000", l: "$500 – $1.000" },
+    { v: "1000_3000", l: "$1.000 – $3.000" },
+    { v: "mas_3000", l: "Más de $3.000" },
+    { v: "no_se", l: "No sé / Prefiero que me orienten" },
+  ];
+
+  // ─────────────────────────────────────────────
+  // STATE
+  // ─────────────────────────────────────────────
+  let state = {
+    contacto: {}, servicios: [], no_estoy_seguro: false,
+    orientacion: "", orientacion_multiple: [], prioridad: "",
+    flags: {},
+    respuestas: {}, notas_auto: [],
+    ordenFlujos: [], stepIndex: 0, stepId: "",
+    id_consulta: "", submitted: false, submitResult: null,
+    ab_extra: {},
+  };
+
+  function saveState() {
+    try {
+      const p = { ...state };
+      delete p.submitted; delete p.submitResult;
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    } catch (e) { console.warn(e); }
+  }
+  function loadState() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      state = { ...state, ...parsed, submitted: false, submitResult: null };
+    } catch (e) { console.warn(e); }
+  }
+  function clearState() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  }
+
+  // ─────────────────────────────────────────────
+  // HELPERS
+  // ─────────────────────────────────────────────
+  function el(tag, attrs, children) {
+    const node = document.createElement(tag);
+    if (attrs) for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") node.className = v;
+      else if (k === "html") node.innerHTML = v;
+      else if (k === "text") node.textContent = v;
+      else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.slice(2), v);
+      else if (v === true) node.setAttribute(k, "");
+      else if (v !== false && v != null) node.setAttribute(k, v);
+    }
+    if (children) [].concat(children).forEach(c => {
+      if (c == null) return;
+      node.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+    });
+    return node;
+  }
+  function setPath(obj, path, value) {
+    const keys = path.split(".");
+    let cur = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (cur[keys[i]] == null || typeof cur[keys[i]] !== "object") cur[keys[i]] = {};
+      cur = cur[keys[i]];
+    }
+    cur[keys[keys.length - 1]] = value;
+  }
+  function getPath(obj, path) {
+    return path.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+  }
+  function rand4() {
+    const abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    const buf = new Uint8Array(4); crypto.getRandomValues(buf);
+    let out = ""; for (let i = 0; i < 4; i++) out += abc[buf[i] % abc.length];
+    return out;
+  }
+  function newIdConsulta() {
+    return "NEB-L-" + Date.now().toString(36).toUpperCase() + "-" + rand4();
+  }
+
+  // ─────────────────────────────────────────────
+  // VALIDADORES
+  // ─────────────────────────────────────────────
+  const V = {
+    nombre: v => {
+      const s = String(v || "").trim();
+      if (s.length < 3) return "Ingresa tu nombre completo (mínimo 3 caracteres).";
+      if (s.length > 100) return "Máximo 100 caracteres.";
+      if (!/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s.'-]+$/.test(s)) return "Solo letras y espacios.";
+      return "";
+    },
+    cedula_rif: v => {
+      const s = String(v || "").trim().toUpperCase();
+      if (!/^[VEJG]-?\d{6,9}$/.test(s)) return "Formato no válido. Ejemplo: V-12345678 o J-123456789.";
+      return "";
+    },
+    email: v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || "").trim()) ? "" : "Ingresa un correo válido.",
+    telefono: v => {
+      const s = String(v || "").replace(/[\s\-()]/g, "");
+      return /^\+?\d{10,15}$/.test(s) ? "" : "Ingresa un teléfono válido con código de país.";
+    },
+    text_min: (min, max) => v => {
+      const s = String(v || "").trim();
+      if (s.length < min) return `Mínimo ${min} caracteres.`;
+      if (max && s.length > max) return `Máximo ${max} caracteres.`;
+      return "";
+    },
+    num_range: (min, max) => v => {
+      const n = Number(v);
+      if (!Number.isFinite(n)) return "Ingresa un número.";
+      if (n < min || n > max) return `Debe estar entre ${min} y ${max}.`;
+      return "";
+    },
+    req: v => (v == null || v === "" || (Array.isArray(v) && v.length === 0)) ? "Este campo es obligatorio." : "",
+  };
+
+  // ─────────────────────────────────────────────
+  // SCHEMA
+  // ─────────────────────────────────────────────
+  const F_CONTACTO = [
+    { id: "nombre", type: "text", label: "Nombre y apellido", required: true, validate: V.nombre, key: "contacto.nombre" },
+    { id: "cedula_rif", type: "text", label: "Cédula o RIF", required: true, validate: V.cedula_rif, key: "contacto.cedula_rif", help: "Ejemplo: V-12345678 o J-123456789" },
+    { id: "email", type: "email", label: "Correo electrónico", required: true, validate: V.email, key: "contacto.email" },
+    { id: "telefono", type: "tel", label: "Teléfono / WhatsApp", required: true, validate: V.telefono, key: "contacto.telefono", help: "Con código de país. Ej: +58 414 1234567" },
+    { id: "tipo_persona", type: "radio", label: "Tipo de persona", required: true, key: "contacto.tipo_persona", options: [
+      { v: "natural", l: "Persona natural" }, { v: "juridica", l: "Persona jurídica" },
+    ]},
+    { id: "solvente_seniat", type: "radio", label: "Solvente con el SENIAT", required: true, key: "flags.solvente_seniat", options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "rechazos_previos", type: "radio", label: "Solicitudes previas rechazadas", required: true, key: "flags.rechazos_previos", options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "nivel_acompanamiento", type: "radio", label: "Nivel de acompañamiento deseado", required: true, key: "flags.nivel_acompanamiento", options: [
+      { v: "solo", l: "Solo (yo hago el trámite, ustedes asesoran)" },
+      { v: "gestor", l: "Con gestor (ustedes me ayudan a tramitar)" },
+      { v: "completo", l: "Completo Nebula (ustedes se encargan de todo)" },
+    ]},
+  ];
+
+  const F_SERVICIOS = [
+    { id: "servicios", type: "checkbox", label: "Cuéntanos lo que buscas", required: true, key: "servicios", options: [
+      { v: "A", l: "Constituir o formalizar mi empresa" },
+      { v: "B", l: "Registrar mi marca (nombre / logo)" },
+      { v: "C", l: "Registrar una patente o invención" },
+      { v: "no_se", l: "No estoy seguro / Necesito orientación" },
+    ]},
+  ];
+
+  function effectiveServicios(s) {
+    if (s.servicios.includes("no_se") && s.servicios.filter(x => x !== "no_se").length === 0) {
+      if (s.orientacion === "a") return ["A"];
+      if (s.orientacion === "b") return ["B"];
+      if (s.orientacion === "c") return ["C"];
+      if (s.orientacion === "d") return s.orientacion_multiple.slice();
+      return [];
+    }
+    return s.servicios.filter(x => x !== "no_se");
+  }
+
+  const F_ORIENTACION = [
+    { id: "0.7", type: "radio", label: "¿Cuál de estas frases describe mejor tu situación?", required: true, key: "orientacion",
+      help: "No te preocupes si no conoces los términos. Elige la frase que más se parezca a lo que necesitas y nosotros te guiamos.",
+      showIf: s => s.servicios.includes("no_se") && s.servicios.filter(x => x !== "no_se").length === 0,
+      options: [
+        { v: "a", l: "Tengo un negocio y quiero formalizarlo" },
+        { v: "b", l: "Tengo un nombre o logo y quiero protegerlo" },
+        { v: "c", l: "Inventé algo y quiero protegerlo" },
+        { v: "d", l: "Quiero varias de las anteriores" },
+      ]},
+    { id: "0.7.d", type: "checkbox", label: "Cuáles de estos servicios necesitas?", required: true, key: "orientacion_multiple",
+      showIf: s => s.orientacion === "d",
+      options: [
+        { v: "A", l: "Constituir o formalizar mi empresa" },
+        { v: "B", l: "Registrar mi marca (nombre / logo)" },
+        { v: "C", l: "Registrar una patente o invención" },
+      ]},
+    { id: "0.11", type: "radio", label: "¿Cuál quieres iniciar primero?", required: true, key: "prioridad",
+      showIf: s => effectiveServicios(s).length > 1,
+      help: "Elige el trámite que quieres iniciar primero. El resto queda pendiente en tu expediente.",
+      optionsFn: s => effectiveServicios(s).map(x => ({ v: x, l: FLUJO_LABELS[x] })) },
+  ];
+
+  const F_A = [
+    { id: "A1.1", type: "textarea", label: "Describe tu actividad", required: true, validate: V.text_min(10, 300) },
+    { id: "A1.2", type: "radio", label: "¿Operas informalmente?", required: true, options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A1.3", type: "checkbox", label: "¿Requiere permisos especiales?", required: true, options: [
+      { v: "alimentos", l: "Alimentos" }, { v: "salud", l: "Salud" }, { v: "transporte", l: "Transporte" },
+      { v: "construccion", l: "Construcción" }, { v: "otro", l: "Otro" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "A2.1", type: "radio", label: "¿Solo o con socios?", required: true, options: [
+      { v: "solo", l: "Solo" }, { v: "con_socios", l: "Con socios" },
+    ]},
+    { id: "A2.2", type: "number", label: "Número de socios", required: true, validate: V.num_range(2, 50), showIf: r => r["A2.1"] === "con_socios" },
+    { id: "A2.3", type: "repeater", label: "Participación por socio", required: true, showIf: r => r["A2.1"] === "con_socios", help: "La suma debe ser exactamente 100%." },
+    { id: "A2.4", type: "radio", label: "¿Aportes en trabajo o bienes?", required: true, showIf: r => r["A2.1"] === "con_socios", options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A2.5", type: "radio", label: "¿Algún socio es extranjero?", required: true, showIf: r => r["A2.1"] === "con_socios", options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A2.6", type: "radio", label: "¿Quién administra?", required: true, showIf: r => r["A2.1"] === "con_socios", options: [
+      { v: "gerente", l: "Gerente" }, { v: "junta", l: "Junta directiva" }, { v: "otro", l: "Otro" },
+    ]},
+    { id: "A2.7", type: "radio", label: "¿Han discutido cláusulas de salida?", required: true, showIf: r => r["A2.1"] === "con_socios", options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "asesoria", l: "Necesito asesoría" },
+    ]},
+    { id: "A3.1", type: "radio", label: "Tipo de sociedad", required: true, options: [
+      { v: "S.R.L.", l: "S.R.L." }, { v: "S.A.", l: "S.A." }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "A3.2", type: "radio", label: "¿Planeas franquiciar o licenciar?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "A4.1", type: "radio", label: "Local", required: true, options: [
+      { v: "propio", l: "Propio" }, { v: "arrendado", l: "Arrendado" }, { v: "aun_no", l: "Aún no" },
+    ]},
+    { id: "A4.2", type: "radio", label: "¿Contrato vigente y notariado?", required: true, showIf: r => r["A4.1"] === "arrendado", options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "en_tramite", l: "En trámite" },
+    ]},
+    { id: "A4.3", type: "radio", label: "Zonificación", required: true, options: [
+      { v: "comercial", l: "Comercial" }, { v: "residencial", l: "Residencial" }, { v: "mixta", l: "Mixta" }, { v: "no_se", l: "No sé" },
+    ], alert: r => r["A4.3"] === "residencial" ? { type: "warning", text: "La actividad comercial en zona residencial puede requerir permiso especial de la alcaldía." } : null },
+    { id: "A4.4", type: "radio", label: "¿Has verificado con la alcaldía?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "A5.1", type: "radio", label: "Moneda del capital", required: true, options: [
+      { v: "bs", l: "Bolívares" }, { v: "divisas", l: "Divisas" }, { v: "mixto", l: "Mixto" },
+    ]},
+    { id: "A5.2", type: "radio", label: "¿El capital está disponible o es estimado?", required: true, options: [
+      { v: "disponible", l: "Disponible" }, { v: "estimado", l: "Estimado" },
+    ]},
+    { id: "A5.3", type: "radio", label: "¿Aportes en bienes?", required: true, options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A5.4", type: "radio", label: "¿Tienes cuenta bancaria disponible de inmediato?", required: true, options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A5.5", type: "radio", label: "¿Harás transacciones en divisas?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ], alert: r => r["A5.5"] === "si" ? { type: "warning", text: "Las operaciones en divisas requieren cumplir con la normativa del BCV." } : null },
+    { id: "A6.1", type: "radio", label: "¿Contratarás empleados?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "tal_vez", l: "Tal vez" },
+    ]},
+    { id: "A6.2", type: "radio", label: "¿Tienes contador o asesor fiscal?", required: true, options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "A6.3", type: "radio", label: "¿Tienes empresas anteriores con obligaciones pendientes?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "A7.1", type: "radio", label: "¿Gestionamos los permisos sectoriales?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "cotizar", l: "Cotizar" },
+    ]},
+    { id: "A7.2", type: "select", label: "Presupuesto aproximado", required: true, options: RANGOS },
+  ];
+
+    const F_B = [
+    { id: "B1.1", type: "radio", label: "¿Qué quieres registrar?", required: true, options: [
+      { v: "nombre", l: "Nombre" }, { v: "logo", l: "Logo" }, { v: "ambos", l: "Ambos" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B1.2", type: "radio", label: "¿Usas el nombre en redes o web?", required: true, options: [{ v: "si", l: "Sí" }, { v: "no", l: "No" }] },
+    { id: "B1.3", type: "radio", label: "¿Tienes dominio?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "na", l: "No aplica" },
+    ]},
+    { id: "B2.1", type: "textarea", label: "Describe tus productos o servicios", required: true, validate: V.text_min(10, 500) },
+    { id: "B2.2", type: "radio", label: "¿Ampliarás la gama?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B3.1", type: "radio", label: "¿Has hecho búsqueda previa en SAPI/Registro?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" },
+    ]},
+    { id: "B3.2", type: "radio", label: "¿Tu nombre incluye palabras genéricas, descriptivas o geográficas?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ], alert: r => r["B3.2"] === "si" ? { type: "warning", text: "Los nombres genéricos o descriptivos tienen mayor riesgo de rechazo por el SAPI. Recomendamos asesoría antes de presentar." } : null },
+    { id: "B3.3", type: "radio", label: "¿Existe riesgo de confusión con una marca notoria?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B3.4", type: "radio", label: "¿Autorizas que hagamos búsqueda de antecedentes?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" },
+    ]},
+    { id: "B4.1", type: "radio", label: "¿Planeas franquiciar o licenciar la marca?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B4.2", type: "radio", label: "¿Usarás la marca fuera de Venezuela?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B4.3", type: "radio", label: "¿Quieres proteger también el eslogan?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "B5.1", type: "select", label: "Presupuesto aproximado", required: true, options: RANGOS },
+  ];
+
+  const F_C = [
+    { id: "C1.1", type: "radio", label: "Tipo de creación", required: true, options: [
+      { v: "invencion", l: "Invención (patente)" },
+      { v: "modelo_utilidad", l: "Modelo de utilidad" },
+      { v: "dibujo_industrial", l: "Dibujo industrial" },
+      { v: "no_se", l: "No sé" },
+    ]},
+    { id: "C1.2", type: "textarea", label: "Descripción breve de tu creación", required: true, validate: V.text_min(20, 500), help: "Cuéntanos qué es y para qué sirve, sin revelar detalles técnicos sensibles." },
+    { id: "C2.1", type: "repeater", label: "Inventores o autores", required: true, help: "Nombre y porcentaje de participación. La suma debe ser 100%." },
+    { id: "C2.2", type: "radio", label: "¿Existe relación laboral o contrato con los inventores?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "C2.3", type: "textarea", label: "¿Cómo se distribuye la titularidad?", required: true, validate: V.text_min(10, 300) },
+    { id: "C3.1", type: "radio", label: "¿Has divulgado públicamente la invención antes de hoy?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ], critical: true },
+    { id: "C3.2", type: "radio", label: "¿Has hecho búsqueda en bases de patentes?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" },
+    ]},
+    { id: "C3.3", type: "radio", label: "¿Tienes descripción técnica, planos o prototipo?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "parcialmente", l: "Parcialmente" }, { v: "no", l: "No" },
+    ]},
+    { id: "C4.1", type: "radio", label: "¿Planeas licenciar, ceder o explotar la creación?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "C4.2", type: "radio", label: "¿Buscas protección internacional (PCT)?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "C4.3", type: "radio", label: "¿Han firmado acuerdos de confidencialidad (NDA)?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+    { id: "C5.1", type: "radio", label: "¿Necesitas apoyo técnico para la memoria descriptiva?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" },
+    ]},
+    { id: "C5.2", type: "select", label: "Presupuesto aproximado", required: true, options: RANGOS },
+  ];
+
+  const F_AB = [
+    { id: "AB.1", type: "radio", label: "¿Quieres que coordinemos ambos trámites (marca + empresa)?", required: true, options: [
+      { v: "si", l: "Sí, coordinar ambos" }, { v: "no", l: "No, por separado" },
+    ]},
+    { id: "AB.2", type: "radio", label: "¿El nombre de la empresa será el mismo de la marca?", required: true, options: [
+      { v: "si", l: "Sí" }, { v: "no", l: "No" }, { v: "no_se", l: "No sé" },
+    ]},
+  ];
+
+  // ─────────────────────────────────────────────
+  // CHECKLIST DOCUMENTAL
+  // ─────────────────────────────────────────────
+  function buildChecklist() {
+    const out = [];
+    const s = state;
+    const servs = effectiveServicios(s);
+    const tieneA = servs.includes("A");
+    const tieneB = servs.includes("B");
+    const tieneC = servs.includes("C");
+    const rA = s.respuestas.flujo_A || {};
+    const rB = s.respuestas.flujo_B || {};
+    const rC = s.respuestas.flujo_C || {};
+    const esJuridica = s.contacto.tipo_persona === "juridica";
+
+    if (esJuridica) {
+      out.push("RIF de la persona jurídica");
+      out.push("Acta constitutiva y última modificación");
+      out.push("Poder notariado del representante legal");
+    } else {
+      out.push("Cédula de identidad vigente");
+    }
+
+    if (tieneA) {
+      if (rA["A2.1"] === "con_socios") {
+        out.push("Cédula/RIF de cada socio");
+        out.push("Aportes de cada socio por escrito");
+      }
+      if (rA["A4.1"] === "arrendado") {
+        out.push("Contrato de arrendamiento notariado");
+        out.push("Carta de aceptación del arrendador");
+      }
+      if (rA["A5.3"] === "si") out.push("Avalúo de bienes aportados");
+      if (rA["A2.5"] === "si") out.push("Documentación migratoria del socio extranjero");
+    }
+
+    if (tieneB) {
+      if (rB["B1.1"] === "logo" || rB["B1.1"] === "ambos") {
+        out.push("Logo en alta resolución (PNG o vector)");
+      }
+      if (rB["B3.4"] === "si") out.push("Autorización firmada para búsqueda de antecedentes");
+    }
+
+    if (tieneC) {
+      out.push("Cédula/RIF de cada inventor");
+      if (rC["C3.3"] === "si" || rC["C3.3"] === "parcialmente") {
+        out.push("Descripción técnica, planos o prototipo");
+      }
+      if (rC["C2.2"] === "si") out.push("Cesión de derechos de los inventores");
+      if (rC["C4.3"] === "si") out.push("Copia de los acuerdos de confidencialidad (NDA)");
+      if (rC["C4.2"] === "si") out.push("Documentación para solicitud PCT");
+    }
+
+    // Dedup
+    return Array.from(new Set(out));
+  }
+
+  // ─────────────────────────────────────────────
+  // ORDEN DE FLUJOS (RAMIFICACIÓN)
+  // ─────────────────────────────────────────────
+  function calcularOrdenFlujos() {
+    const servs = effectiveServicios(state);
+    const prio = state.prioridad;
+    const orden = [];
+
+    function tiene(x) { return servs.includes(x); }
+
+    if (servs.length === 1) {
+      orden.push(servs[0]);
+    } else if (servs.length > 1) {
+      // Respeta la prioridad elegida, y el resto en orden por defecto B→A→C
+      const def = ["B", "A", "C"].filter(tiene);
+      if (prio && tiene(prio)) {
+        orden.push(prio);
+        def.forEach(x => { if (x !== prio) orden.push(x); });
+      } else {
+        def.forEach(x => orden.push(x));
+      }
+    }
+
+    // Nota automática si es A+B
+    state.notas_auto = [];
+    if (tiene("A") && tiene("B")) {
+      state.notas_auto.push("Caso combinado A+B: verificar disponibilidad marcaria y reserva de nombre antes de constituir la empresa.");
+    }
+    if (tiene("C") && (tiene("A") || tiene("B"))) {
+      state.notas_auto.push("Caso combinado con patente: coordinar confidencialidad antes de divulgar la invención en trámites mercantiles.");
+    }
+
+    state.ordenFlujos = orden;
+  }
+
+  // ─────────────────────────────────────────────
+  // CONSTRUCCIÓN DE PASOS
+  // ─────────────────────────────────────────────
+  function buildSteps() {
+    const steps = [];
+
+    steps.push({
+      id: "contacto",
+      title: "Datos de contacto",
+      sub: "Te acompañamos paso a paso. Solo te preguntaremos lo necesario para tu caso.",
+      fields: F_CONTACTO,
+    });
+
+    steps.push({
+      id: "servicios",
+      title: "¿Qué necesitas?",
+      sub: "Según tu selección, te mostraremos solo las preguntas que aplican a tu trámite.",
+      fields: F_SERVICIOS,
+    });
+
+    // Orientación (si aplica)
+    const orientFields = F_ORIENTACION.filter(f => !f.showIf || f.showIf(state));
+    if (state.servicios.includes("no_se") || orientFields.some(f => f.id === "0.11")) {
+      // Recalcular effectiveServicios puede cambiar; usamos un paso dinámico
+    }
+    steps.push({
+      id: "orientacion",
+      title: "Cuéntanos tu situación",
+      sub: "Con esto elegimos el mejor camino para ti.",
+      fields: F_ORIENTACION,
+      dynamic: true,
+    });
+
+    // Pasos de flujos
+    const orden = state.ordenFlujos.length ? state.ordenFlujos : calcularOrdenFlujos() || state.ordenFlujos;
+    if (!state.ordenFlujos.length) calcularOrdenFlujos();
+
+    state.ordenFlujos.forEach((flujo) => {
+      if (flujo === "A") {
+        steps.push({
+          id: "flujo_A",
+          title: "Constituir o formalizar empresa",
+          sub: "Sección A — Empresa",
+          fields: F_A,
+          flow: "A",
+        });
+      }
+      if (flujo === "B") {
+        steps.push({
+          id: "flujo_B",
+          title: "Registrar marca",
+          sub: "Sección B — Marca",
+          fields: F_B,
+          flow: "B",
+        });
+      }
+      if (flujo === "C") {
+        steps.push({
+          id: "flujo_C",
+          title: "Registrar patente o invención",
+          sub: "Sección C — Patente",
+          fields: F_C,
+          flow: "C",
+        });
+      }
+    });
+
+    // Paso A+B si aplica
+    const servs = effectiveServicios(state);
+    if (servs.includes("A") && servs.includes("B")) {
+      steps.push({
+        id: "flujo_AB",
+        title: "Coordinación marca + empresa",
+        sub: "Unas preguntas para coordinar ambos trámites.",
+        fields: F_AB,
+        flow: "AB",
+      });
+    }
+
+    // Checklist
+    steps.push({
+      id: "checklist",
+      title: "Documentos que necesitarás",
+      sub: "No necesitas subirlos ahora. Tu abogado te indicará cómo compartirlos.",
+      checklist: true,
+    });
+
+    return steps;
+  }
+
+  // ─────────────────────────────────────────────
+  // LECTURA/ESCRITURA DE VALORES EN STATE
+  // ─────────────────────────────────────────────
+    function getFieldValue(field) {
+    if (field.key) return getPath(state, field.key);
+    const flow = field.flow || currentFlow;
+    if (flow) return (state.respuestas["flujo_" + flow] || {})[field.id];
+    return state.respuestas[field.id];
+  }
+
+    function setFieldValue(field, value) {
+    if (field.key) {
+      setPath(state, field.key, value);
+      return;
+    }
+    const flow = field.flow || currentFlow;
+    if (flow) {
+      if (!state.respuestas["flujo_" + flow]) state.respuestas["flujo_" + flow] = {};
+      state.respuestas["flujo_" + flow][field.id] = value;
+      return;
+    }
+    state.respuestas[field.id] = value;
+  }
+
+  function getFlowResponses(flow) {
+    return state.respuestas["flujo_" + flow] || {};
+  }
+
+  function fieldIsVisible(field, flowKey) {
+    if (field.showIf) {
+      if (field.key && (field.key === "orientacion" || field.key === "orientacion_multiple" || field.key === "prioridad")) {
+        return field.showIf(state);
+      }
+      const r = flowKey ? getFlowResponses(flowKey) : {};
+      return field.showIf(r);
+    }
+    return true;
+  }
+
+  // ─────────────────────────────────────────────
+  // VALIDACIÓN DE UN CAMPO
+  // ─────────────────────────────────────────────
+    function validateField(field, flowKey) {
+    const v = getFieldValue(field);
+    const effectiveFlow = flowKey || currentFlow;
+    if (!fieldIsVisible(field, effectiveFlow)) return "";
+
+    if (field.required) {
+      if (field.type === "checkbox" || field.type === "repeater") {
+        if (!Array.isArray(v) || v.length === 0) return "Este campo es obligatorio.";
+      } else if (v == null || v === "") {
+        return "Este campo es obligatorio.";
+      }
+    }
+    if (field.validate) {
+      const msg = field.validate(v);
+      if (msg) return msg;
+    }
+
+    // Repeater: suma 100%
+    if (field.type === "repeater" && Array.isArray(v) && v.length > 0) {
+      const total = v.reduce((acc, row) => acc + (Number(row.pct) || 0), 0);
+      if (Math.abs(total - 100) > 0.01) {
+        return "La suma de participaciones debe ser exactamente 100%.";
+      }
+    }
+    return "";
+  }
+
+  // ─────────────────────────────────────────────
+  // VALIDAR PASO COMPLETO
+  // ─────────────────────────────────────────────
+  function validateStep(step) {
+    if (step.checklist) return { ok: true, errors: {} };
+    const errors = {};
+    let ok = true;
+    (step.fields || []).forEach((f) => {
+      const msg = validateField(f, step.flow);
+      if (msg) { errors[f.id] = msg; ok = false; }
+    });
+    return { ok, errors };
+  }
+
+  // ─────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────
+  const root = document.getElementById("nb-intake");
+    let steps = [];
+  let currentFlow = null;
+  let progressBar, progressLabel, cardHost;
+
+  function mountShell() {
+    root.innerHTML = "";
+    root.appendChild(el("div", { class: "nb-brand" }, [
+      el("span", { class: "nb-brand-dot" }),
+      el("span", { text: "Nebula - Intake Legal" }),
+    ]));
+    const progressWrap = el("div", {}, [
+      el("div", { class: "nb-progress" }, [progressBar = el("span")]),
+      progressLabel = el("div", { class: "nb-progress-label" }),
+    ]);
+    root.appendChild(progressWrap);
+    cardHost = el("div", { class: "nb-card" });
+    root.appendChild(cardHost);
+  }
+
+  function updateProgress() {
+    const total = steps.length;
+    const idx = Math.min(state.stepIndex, total - 1);
+    const pct = total <= 1 ? 0 : Math.round((idx / (total - 1)) * 100);
+    if (progressBar) progressBar.style.width = pct + "%";
+    if (progressLabel) progressLabel.textContent = `Paso ${idx + 1} de ${total} · ${pct}%`;
+  }
+
+  function renderStep() {
+    const step = steps[state.stepIndex];
+    if (!step) return;
+    state.stepId = step.id;
+    currentFlow = step.flow || null;
+    cardHost.innerHTML = "";
+
+    if (step.checklist) {
+      renderChecklist(step);
+      return;
+    }
+    if (step.dynamic) {
+      renderOrientacion(step);
+      return;
+    }
+
+    cardHost.appendChild(el("h2", { class: "nb-step-title", text: step.title }));
+    cardHost.appendChild(el("p", { class: "nb-step-sub", text: step.sub || "" }));
+
+    const errorsBox = {};
+    (step.fields || []).forEach((f) => {
+      if (!fieldIsVisible(f, step.flow)) return;
+      const node = renderField(f, step.flow || currentFlow, errorsBox);
+      cardHost.appendChild(node);
+    });
+
+    cardHost.appendChild(renderNav(step));
+    updateProgress();
+    saveState();
+  }
+
+  // ─────────────────────────────────────────────
+  // RENDER DE CAMPO
+  // ─────────────────────────────────────────────
+   function renderField(field, flowKey, errorsBox) {
+    const effectiveFlow = flowKey || currentFlow;
+    const wrap = el("div", { class: "nb-field", "data-field": field.id });
+
+       // Alertas asociadas
+    if (field.alert) {
+      const r = effectiveFlow ? getFlowResponses(effectiveFlow) : state;
+      const v = getFieldValue(field);
+      const a = field.alert(effectiveFlow ? r : state);
+      if (a && v != null && v !== "") {
+        wrap.appendChild(el("div", { class: "nb-alert nb-" + a.type, text: a.text }));
+      }
+    }
+
+    const labelId = "nb-lbl-" + field.id;
+    const lbl = el("label", { class: "nb-label", id: labelId });
+    lbl.appendChild(document.createTextNode(field.label));
+    if (field.required) lbl.appendChild(el("span", { class: "nb-req", text: "*" }));
+    wrap.appendChild(lbl);
+
+    const value = getFieldValue(field);
+    let inputNode;
+
+    if (field.type === "textarea") {
+      inputNode = el("textarea", { class: "nb-textarea", id: field.id, rows: 4 });
+      inputNode.value = value || "";
+      inputNode.addEventListener("input", () => {
+        setFieldValue(field, inputNode.value);
+        saveState();
+        clearError(wrap);
+      });
+      wrap.appendChild(inputNode);
+    } else if (field.type === "select") {
+      inputNode = el("select", { class: "nb-select", id: field.id });
+      inputNode.appendChild(el("option", { value: "", text: "Selecciona una opción" }));
+      field.options.forEach(o => {
+        const opt = el("option", { value: o.v, text: o.l });
+        if (value === o.v) opt.selected = true;
+        inputNode.appendChild(opt);
+      });
+      inputNode.addEventListener("change", () => {
+        setFieldValue(field, inputNode.value);
+        saveState();
+        clearError(wrap);
+      });
+      wrap.appendChild(inputNode);
+    } else if (field.type === "radio") {
+      const opts = field.optionsFn ? field.optionsFn(state) : field.options;
+      const box = el("div", { class: "nb-options" });
+      opts.forEach(o => {
+        const checked = value === o.v;
+        const optLabel = el("label", { class: "nb-option" + (checked ? " is-checked" : "") });
+        const input = el("input", { type: "radio", name: field.id, value: o.v });
+        input.checked = checked;
+        input.addEventListener("change", () => {
+          setFieldValue(field, o.v);
+          saveState();
+          clearError(wrap);
+          if (field.critical && o.v === "si") {
+            showCriticalModal();
+          }
+          // Re-render si cambia ramificación global
+          if (field.key === "orientacion" || field.key === "prioridad" || field.key === "servicios") {
+            refreshFlowStructure();
+          } else {
+            renderStep();
+          }
+        });
+        optLabel.appendChild(input);
+        optLabel.appendChild(el("span", { text: o.l }));
+        box.appendChild(optLabel);
+      });
+      wrap.appendChild(box);
+    } else if (field.type === "checkbox") {
+      const box = el("div", { class: "nb-options" });
+      const arr = Array.isArray(value) ? value.slice() : [];
+      field.options.forEach(o => {
+        const checked = arr.includes(o.v);
+        const optLabel = el("label", { class: "nb-option" + (checked ? " is-checked" : "") });
+        const input = el("input", { type: "checkbox", name: field.id, value: o.v });
+        input.checked = checked;
+        input.addEventListener("change", () => {
+          let next = arr.slice();
+          if (input.checked) next.push(o.v); else next = next.filter(x => x !== o.v);
+          setFieldValue(field, next);
+          saveState();
+          optLabel.classList.toggle("is-checked", input.checked);
+          clearError(wrap);
+          if (field.key === "servicios" || field.key === "orientacion_multiple") {
+            refreshFlowStructure();
+          }
+        });
+        optLabel.appendChild(input);
+        optLabel.appendChild(el("span", { text: o.l }));
+        box.appendChild(optLabel);
+      });
+      wrap.appendChild(box);
+    } else if (field.type === "repeater") {
+      wrap.appendChild(renderRepeater(field));
+    } else {
+      inputNode = el("input", { class: "nb-input", id: field.id, type: field.type || "text" });
+      inputNode.value = value || "";
+      inputNode.addEventListener("input", () => {
+        let v = inputNode.value;
+        if (field.type === "number") v = v === "" ? "" : Number(v);
+        setFieldValue(field, v);
+        saveState();
+        clearError(wrap);
+      });
+      wrap.appendChild(inputNode);
+    }
+
+    if (field.help) wrap.appendChild(el("div", { class: "nb-help", text: field.help }));
+    wrap.appendChild(el("span", { class: "nb-error", "data-error-for": field.id }));
+    errorsBox[field.id] = wrap;
+    return wrap;
+  }
+
+  function clearError(wrap) {
+    const e = wrap.querySelector(".nb-error");
+    if (e) e.textContent = "";
+    const inp = wrap.querySelector(".nb-input, .nb-textarea");
+    if (inp) inp.setAttribute("aria-invalid", "false");
+  }
+
+  // ─────────────────────────────────────────────
+  // REPEATER (socios / inventores)
+  // ─────────────────────────────────────────────
+  function renderRepeater(field) {
+    const host = el("div", {});
+    const box = el("div", { class: "nb-repeater" });
+    let rows = Array.isArray(getFieldValue(field)) ? getFieldValue(field).slice() : [];
+
+    function persist() {
+      setFieldValue(field, rows);
+      saveState();
+    }
+
+    function sumEl() {
+      const total = rows.reduce((a, r) => a + (Number(r.pct) || 0), 0);
+      const s = el("div", { class: "nb-sum" + (Math.abs(total - 100) < 0.01 ? " is-ok" : " is-bad") });
+      s.textContent = "Suma actual: " + total + "%";
+      return s;
+    }
+
+    function redraw() {
+      box.innerHTML = "";
+      if (rows.length === 0) rows.push({ nombre: "", pct: "" });
+      rows.forEach((row, i) => {
+        const r = el("div", { class: "nb-repeater-row" });
+        const nameInput = el("input", { class: "nb-input", type: "text", placeholder: "Nombre" });
+        nameInput.value = row.nombre || "";
+        nameInput.addEventListener("input", () => { rows[i].nombre = nameInput.value; persist(); });
+        const pctInput = el("input", { class: "nb-input", type: "number", placeholder: "%", min: 0, max: 100 });
+        pctInput.value = row.pct === "" ? "" : row.pct;
+        pctInput.addEventListener("input", () => {
+          rows[i].pct = pctInput.value === "" ? "" : Number(pctInput.value);
+          persist();
+          const newSum = sumEl();
+          const old = box.parentNode.querySelector(".nb-sum");
+          if (old) old.replaceWith(newSum);
+        });
+        const del = el("button", { class: "nb-icon-btn", type: "button", "aria-label": "Eliminar" , text: "×" });
+        del.addEventListener("click", () => { rows.splice(i, 1); persist(); redraw(); });
+        r.appendChild(nameInput); r.appendChild(pctInput); r.appendChild(del);
+        box.appendChild(r);
+      });
+      host.querySelector(".nb-sum")?.remove();
+      host.insertBefore(sumEl(), host.querySelector(".nb-add-btn"));
+    }
+
+    const addBtn = el("button", { class: "nb-add-btn", type: "button", text: "+ Añadir fila" });
+    addBtn.addEventListener("click", () => { rows.push({ nombre: "", pct: "" }); persist(); redraw(); });
+
+    host.appendChild(box);
+    host.appendChild(addBtn);
+    host.appendChild(sumEl());
+    redraw();
+    return host;
+  }
+
+  // ─────────────────────────────────────────────
+  // ORIENTACIÓN DINÁMICA
+  // ─────────────────────────────────────────────
+  function renderOrientacion(step) {
+    cardHost.appendChild(el("h2", { class: "nb-step-title", text: step.title }));
+    cardHost.appendChild(el("p", { class: "nb-step-sub", text: step.sub || "" }));
+
+    const visibles = F_ORIENTACION.filter(f => !f.showIf || f.showIf(state));
+    if (visibles.length === 0) {
+      // No aplica: saltar
+      state.stepIndex++;
+      renderStep();
+      return;
+    }
+    visibles.forEach(f => cardHost.appendChild(renderField(f, null, {})));
+
+    // Si tras elegir orientación "a/b/c/d" ya hay flujos, recalcular
+    cardHost.appendChild(renderNav(step));
+    updateProgress();
+    saveState();
+  }
+
+  // ─────────────────────────────────────────────
+  // CHECKLIST
+  // ─────────────────────────────────────────────
+  function renderChecklist(step) {
+    cardHost.appendChild(el("h2", { class: "nb-step-title", text: step.title }));
+    cardHost.appendChild(el("p", { class: "nb-step-sub", text: step.sub || "" }));
+    const list = buildChecklist();
+    const ul = el("ul", { class: "nb-checklist" });
+    list.forEach(item => ul.appendChild(el("li", { text: item })));
+    cardHost.appendChild(ul);
+
+    // Honeypot
+    const hp = el("input", { type: "text", name: "website", tabindex: "-1", autocomplete: "off", class: "nb-hp" });
+    cardHost.appendChild(hp);
+
+    const nav = renderNav(step, { final: true });
+    cardHost.appendChild(nav);
+    updateProgress();
+    saveState();
+  }
+
+  // ─────────────────────────────────────────────
+  // NAVEGACIÓN
+  // ─────────────────────────────────────────────
+  function renderNav(step, opts) {
+    const nav = el("div", { class: "nb-nav" });
+    const back = el("button", { class: "nb-btn nb-btn-ghost", type: "button", text: "Atrás" });
+    back.disabled = state.stepIndex === 0;
+    back.addEventListener("click", () => {
+      state.stepIndex = Math.max(0, state.stepIndex - 1);
+      renderStep();
+    });
+
+    const next = el("button", { class: "nb-btn nb-btn-primary", type: "button" });
+    next.textContent = opts && opts.final ? "Enviar solicitud" : "Continuar";
+    next.addEventListener("click", () => {
+      const res = validateStep(step);
+      if (!res.ok) {
+        showErrors(step, res.errors);
+        return;
+      }
+      if (opts && opts.final) {
+        submit();
+        return;
+      }
+      // Recalcular estructura si cambió el flujo
+      refreshFlowStructure(true);
+      state.stepIndex = Math.min(steps.length - 1, state.stepIndex + 1);
+      renderStep();
+    });
+
+    nav.appendChild(back);
+    nav.appendChild(next);
+    return nav;
+  }
+
+  function showErrors(step, errors) {
+    // Re-render para limpiar y marcar
+    renderStep();
+    Object.keys(errors).forEach((id) => {
+      const fieldWrap = cardHost.querySelector('[data-field="' + id + '"]');
+      if (!fieldWrap) return;
+      const e = fieldWrap.querySelector(".nb-error");
+      if (e) e.textContent = errors[id];
+      const inp = fieldWrap.querySelector(".nb-input, .nb-textarea");
+      if (inp) inp.setAttribute("aria-invalid", "true");
+    });
+    // Scroll al primer error
+    const first = cardHost.querySelector('[aria-invalid="true"]');
+    if (first) first.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  // ─────────────────────────────────────────────
+  // RECALCULAR FLUJOS (ramificación)
+  // ─────────────────────────────────────────────
+  function refreshFlowStructure(rerender) {
+    calcularOrdenFlujos();
+    // Guardamos el id del paso actual para reposicionarnos si sigue existiendo
+    const prevId = steps[state.stepIndex] ? steps[state.stepIndex].id : "";
+    steps = buildSteps();
+    if (rerender) {
+      const newIdx = steps.findIndex(s => s.id === prevId);
+      if (newIdx >= 0) state.stepIndex = newIdx;
+      if (state.stepIndex >= steps.length) state.stepIndex = steps.length - 1;
+    }
+  }
+
+    // ─────────────────────────────────────────────
+  // MODAL CRÍTICO (divulgación previa patente)
+  // ─────────────────────────────────────────────
+  function showCriticalModal() {
+    const overlay = el("div", { class: "nb-modal-overlay" });
+    const modal = el("div", { class: "nb-modal" });
+    modal.appendChild(el("h3", { text: "⚠️ Atención: divulgación previa" }));
+    modal.appendChild(el("p", {
+      text: "La divulgación pública previa puede destruir la novedad de tu invención y afectar el registro. Un abogado de Nebula debe evaluar tu caso antes de continuar. ¿Deseas continuar con la solicitud?"
+    }));
+    const actions = el("div", { class: "nb-modal-actions" });
+
+    const cont = el("button", { class: "nb-btn nb-btn-primary", type: "button", text: "Sí, continuar" });
+    cont.addEventListener("click", () => { overlay.remove(); });
+
+    const back = el("button", { class: "nb-btn nb-btn-ghost", type: "button", text: "Volver y revisar" });
+    back.addEventListener("click", () => {
+      overlay.remove();
+      const r = getFlowResponses("C");
+      r["C3.1"] = "no";
+      state.respuestas.flujo_C = r;
+      saveState();
+      renderStep();
+    });
+
+    actions.appendChild(cont);
+    actions.appendChild(back);
+    modal.appendChild(actions);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+  }
+
+  // ─────────────────────────────────────────────
+  // SUBMIT
+  // ─────────────────────────────────────────────
+  async function submit() {
+    const finalStep = steps[state.stepIndex];
+    const res = validateStep(finalStep);
+    if (!res.ok) { showErrors(finalStep, res.errors); return; }
+
+    // Aseguramos id_consulta
+    if (!state.id_consulta) state.id_consulta = newIdConsulta();
+
+    const honeypot = cardHost.querySelector('input[name="website"]');
+    const hpValue = honeypot ? honeypot.value : "";
+
+    // Construimos payload EXACTO al edge function
+    const payload = {
+      action: "intake",
+      env: ENV,
+      id_consulta: state.id_consulta,
+      contacto: {
+        nombre: state.contacto.nombre || "",
+        cedula_rif: state.contacto.cedula_rif || "",
+        email: state.contacto.email || "",
+        telefono: state.contacto.telefono || "",
+        tipo_persona: state.contacto.tipo_persona || "natural",
+      },
+      servicios_solicitados: effectiveServicios(state),
+      servicio_prioritario: computePrioritario(),
+      flags: {
+        solvente_seniat: state.flags.solvente_seniat || "no_se",
+        rechazos_previos: state.flags.rechazos_previos || "no_se",
+        nivel_acompanamiento: state.flags.nivel_acompanamiento || "solo",
+        no_estoy_seguro: state.servicios.includes("no_se"),
+      },
+      respuestas: buildRespuestasPayload(),
+      checklist: buildChecklist(),
+      honeypot: hpValue,
+    };
+
+    // UI: estado enviando
+    const nav = cardHost.querySelector(".nb-nav");
+    const btns = nav ? nav.querySelectorAll("button") : [];
+    btns.forEach(b => b.disabled = true);
+    const sendBtn = btns[btns.length - 1];
+    const originalText = sendBtn ? sendBtn.textContent : "";
+    if (sendBtn) sendBtn.textContent = "Enviando…";
+
+    try {
+      const resp = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + ANON_KEY,
+          "apikey": ANON_KEY,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await resp.json().catch(() => ({}));
+
+      if (!resp.ok || !data.success) {
+        throw new Error(data.error || "No se pudo enviar la solicitud.");
+      }
+
+      state.submitted = true;
+      state.submitResult = data;
+      clearState();
+      renderSuccess(data);
+    } catch (err) {
+      console.error("[nb-intake] submit error", err);
+      if (sendBtn) { sendBtn.disabled = false; sendBtn.textContent = originalText; }
+      btns.forEach(b => b.disabled = false);
+      const errBox = el("div", { class: "nb-alert nb-critical", text: "No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo, o escríbenos por WhatsApp." });
+      nav.parentNode.insertBefore(errBox, nav);
+    }
+  }
+
+  function computePrioritario() {
+    const servs = effectiveServicios(state);
+    if (servs.length === 0) return "";
+    if (servs.length === 1) return servs[0];
+    // Combinado: respeta prioridad y orden
+    if (state.prioridad && servs.includes(state.prioridad)) {
+      const rest = servs.filter(x => x !== state.prioridad).sort();
+      return state.prioridad + "+" + rest.join("+");
+    }
+    // A+B por convención
+    if (servs.includes("A") && servs.includes("B")) return "B+A";
+    return servs.slice().sort().join("+");
+  }
+
+  function buildRespuestasPayload() {
+    const out = {};
+    // Orientación
+    if (state.servicios.includes("no_se")) {
+      out["0.7"] = state.orientacion || "";
+      if (state.orientacion === "d") out["0.7.d"] = state.orientacion_multiple || [];
+    }
+    if (state.prioridad) out["0.11"] = state.prioridad;
+
+    // Flujos
+    ["A", "B", "C"].forEach((f) => {
+      const r = getFlowResponses(f);
+      if (Object.keys(r).length > 0) out["flujo_" + f] = r;
+    });
+
+    // AB
+    if (state.ab_extra && Object.keys(state.ab_extra).length > 0) {
+      // Se guarda dentro de flujo_AB; aquí asumimos que se guardó como respuestas.flujo_AB
+      out["flujo_AB"] = state.respuestas.flujo_AB || {};
+    } else if (state.respuestas.flujo_AB) {
+      out["flujo_AB"] = state.respuestas.flujo_AB;
+    }
+
+    // Notas automáticas
+    if (state.notas_auto && state.notas_auto.length) out.notas_auto = state.notas_auto;
+
+    return out;
+  }
+
+  // ─────────────────────────────────────────────
+  // PANTALLA DE ÉXITO
+  // ─────────────────────────────────────────────
+  function renderSuccess(data) {
+    cardHost.innerHTML = "";
+    root.querySelectorAll(".nb-progress, .nb-progress-label").forEach(n => n.remove());
+
+    const wrap = el("div", { class: "nb-center" });
+    wrap.appendChild(el("div", { class: "nb-success-icon", text: "✓" }));
+    wrap.appendChild(el("h2", { class: "nb-step-title", text: "¡Recibimos tu solicitud!" }));
+    wrap.appendChild(el("p", { class: "nb-step-sub", text: "Un abogado de Nebula revisará tu caso y te contactará en un plazo de 48 horas hábiles." }));
+
+    const idVal = (data && data.id_consulta) || state.id_consulta;
+    wrap.appendChild(el("p", { text: "Tu número de consulta es:" }));
+    wrap.appendChild(el("div", { class: "nb-consulta-box", text: idVal }));
+    wrap.appendChild(el("p", { class: "nb-help", text: "Cítalo cuando te comuniques con nosotros. También enviamos una copia a tu correo." }));
+
+    cardHost.appendChild(wrap);
+  }
+
+  // ─────────────────────────────────────────────
+  // BOOTSTRAP
+  // ─────────────────────────────────────────────
+  function boot() {
+    loadState();
+    mountShell();
+    calcularOrdenFlujos();
+    steps = buildSteps();
+
+    // Si había un stepIndex guardado válido, lo respetamos
+    if (typeof state.stepIndex !== "number" || state.stepIndex < 0) state.stepIndex = 0;
+    if (state.stepIndex >= steps.length) state.stepIndex = 0;
+
+    if (state.submitted && state.submitResult) {
+      renderSuccess(state.submitResult);
+      return;
+    }
+
+    renderStep();
+  }
+
+  // Exponer un reset para debugging / soporte
+  window.nbIntakeReset = function () {
+    clearState();
+    state = {
+      contacto: {}, servicios: [], no_estoy_seguro: false,
+      orientacion: "", orientacion_multiple: [], prioridad: "",
+      flags: {},
+      respuestas: {}, notas_auto: [],
+      ordenFlujos: [], stepIndex: 0, stepId: "",
+      id_consulta: "", submitted: false, submitResult: null,
+      ab_extra: {},
+    };
+    boot();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+
+</body>
+</html>
