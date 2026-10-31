@@ -799,7 +799,28 @@
     if (progressLabel) progressLabel.textContent = `Paso ${idx + 1} de ${total} · ${pct}%`;
   }
 
-  function renderStep() {
+    // ─────────────────────────────────────────────
+  // SCROLL AL TOPE DEL FORMULARIO
+  // ─────────────────────────────────────────────
+  function scrollToFormTop() {
+    requestAnimationFrame(function () {
+      const anchor = document.querySelector(".nb-brand") || root;
+      if (!anchor) return;
+
+      const rect = anchor.getBoundingClientRect();
+      const absoluteTop = rect.top + window.pageYOffset;
+
+      const OFFSET = 24;
+      const targetY = Math.max(0, absoluteTop - OFFSET);
+
+      const needsScroll = Math.abs(window.pageYOffset - targetY) > 8;
+      if (!needsScroll) return;
+
+      window.scrollTo({ top: targetY, behavior: "smooth" });
+    });
+  }
+
+    function renderStep() {
     const step = steps[state.stepIndex];
     if (!step) return;
     state.stepId = step.id;
@@ -808,10 +829,12 @@
 
     if (step.checklist) {
       renderChecklist(step);
+      scrollToFormTop();
       return;
     }
     if (step.dynamic) {
       renderOrientacion(step);
+      scrollToFormTop();
       return;
     }
 
@@ -828,8 +851,8 @@
     cardHost.appendChild(renderNav(step));
     updateProgress();
     saveState();
+    scrollToFormTop();
   }
-
   // ─────────────────────────────────────────────
   // RENDER DE CAMPO
   // ─────────────────────────────────────────────
@@ -1293,6 +1316,7 @@
     wrap.appendChild(el("p", { class: "nb-help", text: "Cítalo cuando te comuniques con nosotros. También enviamos una copia a tu correo." }));
 
     cardHost.appendChild(wrap);
+           scrollToFormTop();
   }
 
   // ─────────────────────────────────────────────
